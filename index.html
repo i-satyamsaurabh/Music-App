@@ -27,7 +27,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            overflow-y: scroll;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -39,7 +38,7 @@
             align-items: center;
             color: var(--text-color);
             padding: 0;
-            overflow-y: scroll;
+            overflow-y: hidden;
             transition: background 0.5s ease;
             overflow: hidden;
         }
@@ -52,7 +51,7 @@
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             padding: 20px;
-            overflow: scroll;
+            overflow: hidden;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
@@ -224,10 +223,12 @@
         }
 
         .song-title {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            /* Increased from 1.2rem */
             color: var(--light-color);
             margin-bottom: 5px;
-            font-weight: 600;
+            font-weight: 700;
+            /* Increased from 600 */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -270,8 +271,8 @@
         }
 
         .cassette {
-            width: 200px;
-            height: 120px;
+            width: 300px;
+            height: 150px;
             background: var(--cassette-color);
             border-radius: 8px;
             margin: 0 auto;
@@ -306,7 +307,7 @@
             bottom: 12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 30px;
+            width: 60px;
             height: 8px;
             background: var(--cassette-dark);
             border-radius: 4px;
@@ -318,7 +319,8 @@
             top: 16px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.8rem;
+            font-size: 0.4rem;
+            /* Increased from 0.8rem */
             color: var(--accent-color);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -328,7 +330,18 @@
             max-width: 180px;
             text-align: center;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-            font-weight: 600;
+            /* Increased from 600 */
+        }
+
+        .cassette-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            z-index: -1;
         }
 
         .cassette-reels-container {
@@ -716,6 +729,8 @@
             transform: translateY(-20px);
             transition: all 0.3s ease;
             position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-overlay.active .modal {
@@ -1080,8 +1095,8 @@
             }
 
             .cassette {
-                width: 160px;
-                height: 100px;
+                width: 300px;
+                height: 220px;
             }
 
             .cassette-reel {
@@ -1191,18 +1206,18 @@
 
             .cassette {
                 width: 120px;
-                height: 75px;
+                height: 95px;
             }
 
             .cassette-reel {
                 width: 25px;
                 height: 25px;
-                bottom: 25px;
+                bottom: -5px;
             }
 
             .cassette-label {
-                font-size: 0.7rem;
-                top: 12px;
+                font-size: 0.5rem;
+                top: 3px;
             }
 
             .visualizer-container {
@@ -1292,6 +1307,7 @@
                                 <div class="cassette-reel" id="reel-left"></div>
                                 <div class="cassette-reel" id="reel-right"></div>
                             </div>
+                            <!-- Cassette image will be added here dynamically -->
                         </div>
                     </div>
 
@@ -1384,6 +1400,16 @@
                     </div>
                     <div class="file-name" id="file-name"></div>
                 </div>
+                <!-- New image upload field -->
+                <div class="form-group">
+                    <label class="form-label">Song Image (Optional)</label>
+                    <div class="file-input-container" id="image-drop-area">
+                        <i class="fas fa-image"></i>
+                        <div class="file-input-text">Drag & drop an image for the cassette or click to browse</div>
+                        <input type="file" id="image-file-input" class="file-input" accept="image/*">
+                    </div>
+                    <div class="file-name" id="image-file-name"></div>
+                </div>
                 <button type="submit" class="submit-btn">Add to Playlist</button>
             </form>
         </div>
@@ -1424,6 +1450,7 @@
             const songTitle = document.querySelector('.song-title');
             const songArtist = document.querySelector('.song-artist');
             const cassetteLabel = document.querySelector('.cassette-label');
+            const cassette = document.querySelector('.cassette');
             const reelLeft = document.getElementById('reel-left');
             const reelRight = document.getElementById('reel-right');
             const liveStatus = document.querySelector('.live-status');
@@ -1439,6 +1466,11 @@
             const musicFileInput = document.getElementById('music-file-input');
             const fileDropArea = document.getElementById('file-drop-area');
             const fileName = document.getElementById('file-name');
+
+            // New image upload elements
+            const imageFileInput = document.getElementById('image-file-input');
+            const imageDropArea = document.getElementById('image-drop-area');
+            const imageFileName = document.getElementById('image-file-name');
 
             // Toast Elements
             const toast = document.getElementById('toast');
@@ -1526,12 +1558,32 @@
                     audioPlayer.src = song.blobUrl;
                 }
 
+                // Display song image in cassette if available
+                updateCassetteImage(song.imageUrl);
+
                 // Reset progress
                 progressBar.style.width = '0%';
                 currentTimeEl.textContent = '0:00';
 
                 // Set the total time directly from our song data
                 totalTimeEl.textContent = song.duration;
+            };
+
+            // Update cassette image
+            const updateCassetteImage = (imageUrl) => {
+                // Remove any existing cassette image
+                const existingImage = cassette.querySelector('.cassette-image');
+                if (existingImage) {
+                    existingImage.remove();
+                }
+
+                // Add new image if available
+                if (imageUrl) {
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.className = 'cassette-image';
+                    cassette.appendChild(img);
+                }
             };
 
             // Play song
@@ -1795,15 +1847,17 @@
             };
 
             // Add song to playlist
-            const addSongToPlaylist = (title, artist, file) => {
-                // Create a blob URL for the file
+            const addSongToPlaylist = (title, artist, file, imageFile) => {
+                // Create blob URLs for the files
                 const blobUrl = file ? URL.createObjectURL(file) : null;
+                const imageUrl = imageFile ? URL.createObjectURL(imageFile) : null;
 
                 // Add to playlist
                 const newSong = {
                     title,
                     artist,
                     blobUrl,
+                    imageUrl,
                     duration: '3:00' // Default duration for demo
                 };
 
@@ -1873,6 +1927,7 @@
                 // Reset form
                 addMusicForm.reset();
                 fileName.textContent = '';
+                imageFileName.textContent = '';
             };
 
             // Close add music modal
@@ -1880,7 +1935,7 @@
                 addMusicModal.classList.remove('active');
             };
 
-            // Handle file input change
+            // Handle music file input change
             const handleFileInputChange = (e) => {
                 const file = e.target.files[0];
                 if (file) {
@@ -1913,6 +1968,15 @@
 
                         songTitleInput.value = title;
                     }
+                }
+            };
+
+            // Handle image file input change
+            const handleImageInputChange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    imageFileName.textContent = file.name;
+                    imageDropArea.classList.add('glow');
                 }
             };
 
@@ -1978,8 +2042,9 @@
 
             // File input change
             musicFileInput.addEventListener('change', handleFileInputChange);
+            imageFileInput.addEventListener('change', handleImageInputChange);
 
-            // File drag and drop
+            // File drag and drop for music
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 fileDropArea.addEventListener(eventName, (e) => {
                     e.preventDefault();
@@ -2005,6 +2070,32 @@
                 }
             }, false);
 
+            // File drag and drop for image
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                imageDropArea.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }, false);
+            });
+
+            imageDropArea.addEventListener('dragenter', () => {
+                imageDropArea.classList.add('glow');
+            }, false);
+
+            imageDropArea.addEventListener('dragleave', () => {
+                if (!imageFileName.textContent) {
+                    imageDropArea.classList.remove('glow');
+                }
+            }, false);
+
+            imageDropArea.addEventListener('drop', (e) => {
+                const files = e.dataTransfer.files;
+                if (files.length) {
+                    imageFileInput.files = files;
+                    handleImageInputChange({ target: { files } });
+                }
+            }, false);
+
             // Form submit
             addMusicForm.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -2012,9 +2103,10 @@
                 const title = songTitleInput.value;
                 const artist = artistNameInput.value;
                 const file = musicFileInput.files[0];
+                const imageFile = imageFileInput.files[0];
 
                 if (title && artist && file) {
-                    addSongToPlaylist(title, artist, file);
+                    addSongToPlaylist(title, artist, file, imageFile);
                     showToast(`"${title}" by ${artist} added to playlist!`);
                     closeAddMusicModal();
 
@@ -2026,7 +2118,7 @@
                         playSong();
                     }
                 } else {
-                    showToast("Please fill all fields and select a music file");
+                    showToast("Please fill all required fields and select a music file");
                 }
             });
 
