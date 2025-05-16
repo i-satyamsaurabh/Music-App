@@ -42,8 +42,8 @@
         }
 
         .container {
-            width: 100%;
-            max-width: 800px;
+            height: 95vh;
+            width: 80vw;
             background: rgba(19, 21, 26, 0.85);
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
@@ -67,14 +67,37 @@
             font-size: 1.2rem;
             cursor: pointer;
             display: flex;
-            align-items: center;
-            justify-content: center;
             transition: all 0.3s ease;
+            z-index: 10;
         }
 
         .theme-toggle:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: rotate(30deg);
+        }
+
+        .add-music-btn {
+            position: absolute;
+            top: 15px;
+            right: 65px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .add-music-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
         }
 
         .header {
@@ -616,6 +639,189 @@
             z-index: 100;
         }
 
+        /* Add Music Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(30, 32, 40, 0.95);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--light-color);
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--light-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--light-color);
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--light-color);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(255, 118, 118, 0.2);
+        }
+
+        .file-input-container {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+
+        .file-input-container:hover {
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .file-input-container i {
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .file-input-text {
+            color: var(--light-color);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            text-align: center;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Empty playlist message */
+        .empty-playlist {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+        }
+
         /* Animations */
         @keyframes pulse {
             0% {
@@ -713,6 +919,28 @@
             background: rgba(255, 255, 255, 0.9);
         }
 
+        body.light-theme .modal {
+            background: rgba(240, 240, 245, 0.95);
+        }
+
+        body.light-theme .form-input {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--dark-color);
+        }
+
+        body.light-theme .file-input-container {
+            border: 2px dashed rgba(0, 0, 0, 0.2);
+        }
+
+        body.light-theme .file-input-container i {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        body.light-theme .file-input-text {
+            color: var(--dark-color);
+        }
+
         /* Responsive styles */
         @media (min-width: 769px) and (max-width: 1024px) {
             .container {
@@ -774,54 +1002,156 @@
             .bottom-controls {
                 display: block;
             }
+        }
 
-            /* Make sure the container is fully visible in landscape */
-            @media (orientation: landscape) {
-                body {
-                    align-items: flex-start;
-                    padding: 10px;
-                }
+        /* Enhanced landscape mode for mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            body {
+                align-items: flex-start;
+                padding: 10px;
+            }
 
-                .container {
-                    max-height: calc(100vh - 20px);
-                    overflow-y: auto;
-                    margin-bottom: 0;
-                }
+            .container {
+                max-height: calc(100vh - 20px);
+                overflow-y: auto;
+                margin-bottom: 0;
+                padding: 15px;
+            }
 
-                .main-content {
-                    flex-direction: row;
-                    align-items: flex-start;
-                }
+            .main-content {
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 15px;
+            }
 
-                .top-section {
-                    width: 50%;
-                }
+            .header {
+                margin-bottom: 15px;
+            }
 
-                .playlist-container {
-                    width: 50%;
-                    max-height: none;
-                    height: 100%;
-                    margin-top: 0;
-                }
+            h1 {
+                font-size: 1.6rem;
+                margin-bottom: 5px;
+            }
 
-                .artwork-container {
-                    width: 150px;
-                    height: 150px;
-                }
+            .subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
 
-                .cassette {
-                    width: 180px;
-                    height: 120px;
-                }
+            .top-section {
+                width: 50%;
+                gap: 10px;
+            }
 
-                .cassette-reel {
-                    width: 40px;
-                    height: 40px;
-                }
+            .player-interface {
+                gap: 10px;
+            }
 
-                .bottom-controls {
-                    display: none;
-                }
+            .artwork-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            .song-title {
+                font-size: 1.2rem;
+                margin-bottom: 5px;
+            }
+
+            .song-artist {
+                font-size: 0.9rem;
+            }
+
+            .visualizer-container {
+                height: 40px;
+                margin-bottom: 5px;
+            }
+
+            .cassette {
+                width: 160px;
+                height: 100px;
+            }
+
+            .cassette-reel {
+                width: 35px;
+                height: 35px;
+            }
+
+            .cassette-reel::after {
+                width: 25px;
+                height: 25px;
+            }
+
+            .progress-container {
+                margin-bottom: 5px;
+            }
+
+            .timer-container {
+                margin-bottom: 10px;
+                font-size: 0.8rem;
+            }
+
+            .player-controls {
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+
+            .control-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+
+            .play-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .volume-container {
+                margin-bottom: 10px;
+                padding: 5px 10px;
+            }
+
+            .volume-slider {
+                width: 80px;
+            }
+
+            .playlist-container {
+                width: 50%;
+                max-height: none;
+                height: calc(100vh - 50px);
+                margin-top: 0;
+                padding: 10px;
+            }
+
+            .playlist-header {
+                margin-bottom: 10px;
+            }
+
+            .playlist-title {
+                font-size: 1rem;
+            }
+
+            .playlist-item {
+                padding: 8px 10px;
+                margin-bottom: 5px;
+            }
+
+            .song-number {
+                min-width: 15px;
+                font-size: 0.8rem;
+            }
+
+            .song-name {
+                font-size: 0.9rem;
+            }
+
+            .song-duration {
+                font-size: 0.8rem;
+            }
+
+            .bottom-controls {
+                display: none;
             }
         }
 
@@ -884,6 +1214,32 @@
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.3);
         }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast i {
+            color: var(--accent-color);
+        }
     </style>
 </head>
 
@@ -891,6 +1247,9 @@
     <div class="container">
         <button class="theme-toggle" id="theme-toggle">
             <i class="fas fa-moon"></i>
+        </button>
+        <button class="add-music-btn" id="add-music-btn">
+            <i class="fas fa-plus"></i>
         </button>
 
         <div class="header">
@@ -973,61 +1332,16 @@
 
             <div class="playlist-container" id="playlist-container">
                 <div class="playlist-header">
-                    <div class="playlist-title">90s Hits Playlist</div>
+                    <div class="playlist-title">Your Music Collection</div>
                     <button class="playlist-toggle" id="playlist-toggle">
                         <i class="fas fa-chevron-up"></i>
                     </button>
                 </div>
-                <div class="playlist-items">
-                    <div class="playlist-item active">
-                        <div class="song-details">
-                            <div class="song-number">01</div>
-                            <div class="song-name">Tujhe Dekha To Yeh Jana Sanam</div>
-                        </div>
-                        <div class="song-duration">5:42</div>
+                <div class="playlist-items" id="playlist-items">
+                    <div class="empty-playlist" id="empty-playlist">
+                        Your playlist is empty. Click the + button to add music!
                     </div>
-                    <div class="playlist-item">
-                        <div class="song-details">
-                            <div class="song-number">02</div>
-                            <div class="song-name">Pehla Nasha</div>
-                        </div>
-                        <div class="song-duration">4:18</div>
-                    </div>
-                    <div class="playlist-item">
-                        <div class="song-details">
-                            <div class="song-number">03</div>
-                            <div class="song-name">Dil To Pagal Hai</div>
-                        </div>
-                        <div class="song-duration">5:10</div>
-                    </div>
-                    <div class="playlist-item">
-                        <div class="song-details">
-                            <div class="song-number">04</div>
-                            <div class="song-name">Kuch Kuch Hota Hai</div>
-                        </div>
-                        <div class="song-duration">4:56</div>
-                    </div>
-                    <div class="playlist-item">
-                        <div class="song-details">
-                            <div class="song-number">05</div>
-                            <div class="song-name">Chaiyya Chaiyya</div>
-                        </div>
-                        <div class="song-duration">6:12</div>
-                    </div>
-                    <div class="playlist-item">
-                        <div class="song-details">
-                            <div class="song-number">06</div>
-                            <div class="song-name">Ek Pal Ka Jeena</div>
-                        </div>
-                        <div class="song-duration">4:32</div>
-                    </div>
-                    <div class="playlist-item">
-                        <div class="song-details">
-                            <div class="song-number">07</div>
-                            <div class="song-name">Dil Se Re</div>
-                        </div>
-                        <div class="song-duration">5:28</div>
-                    </div>
+                    <!-- Playlist items will be generated dynamically -->
                 </div>
             </div>
         </div>
@@ -1051,6 +1365,45 @@
         </div>
     </div>
 
+    <!-- Add Music Modal -->
+    <div class="modal-overlay" id="add-music-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Add New Music</div>
+                <button class="close-modal" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="add-music-form">
+                <div class="form-group">
+                    <label for="song-title-input" class="form-label">Song Title</label>
+                    <input type="text" id="song-title-input" class="form-input" placeholder="Enter song title" required>
+                </div>
+                <div class="form-group">
+                    <label for="artist-name-input" class="form-label">Artist Name</label>
+                    <input type="text" id="artist-name-input" class="form-input" placeholder="Enter artist name"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Music File</label>
+                    <div class="file-input-container" id="file-drop-area">
+                        <i class="fas fa-music"></i>
+                        <div class="file-input-text">Drag & drop your music file here or click to browse</div>
+                        <input type="file" id="music-file-input" class="file-input" accept="audio/*" required>
+                    </div>
+                    <div class="file-name" id="file-name"></div>
+                </div>
+                <button type="submit" class="submit-btn">Add to Playlist</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message"></span>
+    </div>
+
     <!-- Audio element (hidden) -->
     <audio id="audio-player"></audio>
 
@@ -1072,9 +1425,10 @@
             const volumeSlider = document.getElementById('volume-slider');
             const volumeValue = document.querySelector('.volume-value');
             const volumeIcon = document.querySelector('.volume-icon i');
-            const playlistItems = document.querySelectorAll('.playlist-item');
             const playlistToggle = document.getElementById('playlist-toggle');
             const playlistContainer = document.getElementById('playlist-container');
+            const playlistItems = document.getElementById('playlist-items');
+            const emptyPlaylist = document.getElementById('empty-playlist');
             const themeToggle = document.getElementById('theme-toggle');
             const themeIcon = document.querySelector('.theme-toggle i');
             const songTitle = document.querySelector('.song-title');
@@ -1088,6 +1442,21 @@
             const mobilePrevBtn = document.getElementById('mobile-prev-btn');
             const mobileNextBtn = document.getElementById('mobile-next-btn');
 
+            // Modal Elements
+            const addMusicBtn = document.getElementById('add-music-btn');
+            const addMusicModal = document.getElementById('add-music-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const addMusicForm = document.getElementById('add-music-form');
+            const songTitleInput = document.getElementById('song-title-input');
+            const artistNameInput = document.getElementById('artist-name-input');
+            const musicFileInput = document.getElementById('music-file-input');
+            const fileDropArea = document.getElementById('file-drop-area');
+            const fileName = document.getElementById('file-name');
+
+            // Toast Elements
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+
             // Create visualizer bars
             const createVisualizer = () => {
                 visualizer.innerHTML = '';
@@ -1100,51 +1469,8 @@
             };
             createVisualizer();
 
-            // Playlist data
-            const playlist = [
-                {
-                    title: 'Tujhe Dekha To Yeh Jana Sanam',
-                    artist: 'Kumar Sanu & Lata Mangeshkar',
-                    src: 'https://example.com/songs/tujhe-dekha-to.mp3', // Replace with actual URL
-                    duration: '5:42'
-                },
-                {
-                    title: 'Pehla Nasha',
-                    artist: 'Udit Narayan & Sadhana Sargam',
-                    src: 'https://example.com/songs/pehla-nasha.mp3', // Replace with actual URL
-                    duration: '4:18'
-                },
-                {
-                    title: 'Dil To Pagal Hai',
-                    artist: 'Lata Mangeshkar & Udit Narayan',
-                    src: 'https://example.com/songs/dil-to-pagal-hai.mp3', // Replace with actual URL
-                    duration: '5:10'
-                },
-                {
-                    title: 'Kuch Kuch Hota Hai',
-                    artist: 'Udit Narayan & Alka Yagnik',
-                    src: 'https://example.com/songs/kuch-kuch-hota-hai.mp3', // Replace with actual URL
-                    duration: '4:56'
-                },
-                {
-                    title: 'Chaiyya Chaiyya',
-                    artist: 'Sukhwinder Singh & Sapna Awasthi',
-                    src: 'https://example.com/songs/chaiyya-chaiyya.mp3', // Replace with actual URL
-                    duration: '6:12'
-                },
-                {
-                    title: 'Ek Pal Ka Jeena',
-                    artist: 'Lucky Ali',
-                    src: 'https://example.com/songs/ek-pal-ka-jeena.mp3', // Replace with actual URL
-                    duration: '4:32'
-                },
-                {
-                    title: 'Dil Se Re',
-                    artist: 'A.R. Rahman & Anuradha Sriram',
-                    src: 'https://example.com/songs/dil-se-re.mp3', // Replace with actual URL
-                    duration: '5:28'
-                }
-            ];
+            // Playlist data - now empty by default
+            let playlist = [];
 
             // Variables
             let currentSongIndex = 0;
@@ -1154,41 +1480,76 @@
 
             // Initialize player
             const initPlayer = () => {
-                loadSong(currentSongIndex);
-                updatePlaylistActiveItem();
+                // Check if there are songs in the playlist
+                if (playlist.length > 0) {
+                    loadSong(currentSongIndex);
+                    updatePlaylistActiveItem();
+                    hideEmptyPlaylistMessage();
+                } else {
+                    showEmptyPlaylistMessage();
+                    songTitle.textContent = "No songs in playlist";
+                    songArtist.textContent = "Add music to get started";
+                    cassetteLabel.textContent = "Empty Playlist";
+                    totalTimeEl.textContent = "0:00";
+                }
+
                 audioPlayer.volume = volumeSlider.value;
                 volumeValue.textContent = Math.round(volumeSlider.value * 100) + '%';
+
+                // Load saved playlist from localStorage if available
+                loadPlaylistFromStorage();
             };
 
             // Load song
             const loadSong = (index) => {
+                if (playlist.length === 0) return;
+
                 const song = playlist[index];
                 songTitle.textContent = song.title;
                 songArtist.textContent = song.artist;
                 cassetteLabel.textContent = song.title;
 
-                // In a real app, you would set the audio source
-                // audioPlayer.src = song.src;
-
-                // For demo purposes, we'll simulate loading
-                audioPlayer.src = '';
-                totalTimeEl.textContent = song.duration;
+                // Set the audio source from the blob URL
+                if (song.blobUrl) {
+                    audioPlayer.src = song.blobUrl;
+                }
 
                 // Reset progress
                 progressBar.style.width = '0%';
                 currentTimeEl.textContent = '0:00';
+
+                // Update total time once metadata is loaded
+                audioPlayer.onloadedmetadata = function () {
+                    const duration = audioPlayer.duration;
+                    const minutes = Math.floor(duration / 60);
+                    const seconds = Math.floor(duration % 60);
+                    totalTimeEl.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    song.duration = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    updatePlaylistItem(index);
+                };
             };
 
             // Play song
             const playSong = () => {
+                if (playlist.length === 0) {
+                    showToast("Please add songs to your playlist first!");
+                    return;
+                }
+
                 isPlaying = true;
-                audioPlayer.play().catch(e => console.log('Audio play error:', e));
+                audioPlayer.play().catch(e => {
+                    console.log('Audio play error:', e);
+                    showToast("Error playing audio. Please try again.");
+                });
+
                 playBtn.querySelector('i').classList.replace('fa-play', 'fa-pause');
                 mobilePlayBtn.querySelector('i').classList.replace('fa-play', 'fa-pause');
 
                 // Start cassette reels rotation
                 reelLeft.classList.add('rotating');
+                reelLeft.classList.remove('paused');
                 reelRight.classList.add('rotating');
+                reelRight.classList.remove('paused');
 
                 // Start visualizer
                 startVisualizer();
@@ -1199,6 +1560,8 @@
 
             // Pause song
             const pauseSong = () => {
+                if (playlist.length === 0) return;
+
                 isPlaying = false;
                 audioPlayer.pause();
                 playBtn.querySelector('i').classList.replace('fa-pause', 'fa-play');
@@ -1218,9 +1581,11 @@
             // Stop song
             const stopSong = () => {
                 pauseSong();
-                audioPlayer.currentTime = 0;
-                progressBar.style.width = '0%';
-                currentTimeEl.textContent = '0:00';
+                if (audioPlayer.src) {
+                    audioPlayer.currentTime = 0;
+                    progressBar.style.width = '0%';
+                    currentTimeEl.textContent = '0:00';
+                }
 
                 // Reset cassette reels
                 reelLeft.classList.remove('rotating', 'paused');
@@ -1229,6 +1594,8 @@
 
             // Previous song
             const prevSong = () => {
+                if (playlist.length === 0) return;
+
                 currentSongIndex--;
                 if (currentSongIndex < 0) {
                     currentSongIndex = playlist.length - 1;
@@ -1242,6 +1609,8 @@
 
             // Next song
             const nextSong = () => {
+                if (playlist.length === 0) return;
+
                 currentSongIndex++;
                 if (currentSongIndex > playlist.length - 1) {
                     currentSongIndex = 0;
@@ -1270,6 +1639,8 @@
 
             // Set progress bar on click
             const setProgress = (e) => {
+                if (playlist.length === 0) return;
+
                 const width = progressContainer.clientWidth;
                 const clickX = e.offsetX;
                 const duration = audioPlayer.duration;
@@ -1296,7 +1667,8 @@
 
             // Update active playlist item
             const updatePlaylistActiveItem = () => {
-                playlistItems.forEach((item, index) => {
+                const items = document.querySelectorAll('.playlist-item');
+                items.forEach((item, index) => {
                     if (index === currentSongIndex) {
                         item.classList.add('active');
                     } else {
@@ -1359,6 +1731,238 @@
                 });
             };
 
+            // Show empty playlist message
+            const showEmptyPlaylistMessage = () => {
+                emptyPlaylist.style.display = 'block';
+            };
+
+            // Hide empty playlist message
+            const hideEmptyPlaylistMessage = () => {
+                emptyPlaylist.style.display = 'none';
+            };
+
+            // Render playlist items
+            const renderPlaylist = () => {
+                // Clear existing items except the empty message
+                const items = document.querySelectorAll('.playlist-item');
+                items.forEach(item => item.remove());
+
+                if (playlist.length === 0) {
+                    showEmptyPlaylistMessage();
+                    return;
+                }
+
+                hideEmptyPlaylistMessage();
+
+                // Add new items
+                playlist.forEach((song, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'playlist-item';
+                    if (index === currentSongIndex) {
+                        item.classList.add('active');
+                    }
+
+                    item.innerHTML = `
+                        <div class="song-details">
+                            <div class="song-number">${(index + 1).toString().padStart(2, '0')}</div>
+                            <div class="song-name">${song.title}</div>
+                        </div>
+                        <div class="song-duration">${song.duration || '0:00'}</div>
+                    `;
+
+                    item.addEventListener('click', () => {
+                        currentSongIndex = index;
+                        loadSong(currentSongIndex);
+                        updatePlaylistActiveItem();
+                        playSong();
+                    });
+
+                    playlistItems.appendChild(item);
+                });
+            };
+
+            // Update a specific playlist item
+            const updatePlaylistItem = (index) => {
+                const items = document.querySelectorAll('.playlist-item');
+                if (items[index]) {
+                    const durationEl = items[index].querySelector('.song-duration');
+                    if (durationEl) {
+                        durationEl.textContent = playlist[index].duration || '0:00';
+                    }
+                }
+            };
+
+            // Add song to playlist
+            const addSongToPlaylist = (title, artist, file) => {
+                // Create a blob URL for the file
+                const blobUrl = URL.createObjectURL(file);
+
+                // Add to playlist
+                const newSong = {
+                    title,
+                    artist,
+                    blobUrl,
+                    duration: '0:00' // Will be updated when loaded
+                };
+
+                playlist.push(newSong);
+
+                // If this is the first song, load it
+                if (playlist.length === 1) {
+                    currentSongIndex = 0;
+                    loadSong(currentSongIndex);
+                }
+
+                // Render the updated playlist
+                renderPlaylist();
+
+                // Save playlist to localStorage
+                savePlaylistToStorage();
+
+                return newSong;
+            };
+
+            // Save playlist to localStorage
+            const savePlaylistToStorage = () => {
+                // We can't store blob URLs in localStorage, so we'll just store metadata
+                const playlistData = playlist.map(song => ({
+                    title: song.title,
+                    artist: song.artist,
+                    duration: song.duration
+                }));
+
+                try {
+                    localStorage.setItem('90sHindiMusicPlaylist', JSON.stringify(playlistData));
+                } catch (e) {
+                    console.error('Error saving playlist to localStorage:', e);
+                }
+            };
+
+            // Load playlist from localStorage
+            const loadPlaylistFromStorage = () => {
+                try {
+                    const playlistData = localStorage.getItem('90sHindiMusicPlaylist');
+                    if (playlistData) {
+                        const parsedData = JSON.parse(playlistData);
+
+                        // We can't restore the actual audio files, but we can show the metadata
+                        if (parsedData.length > 0) {
+                            showToast("Previous playlist metadata loaded. Please re-add your music files.");
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error loading playlist from localStorage:', e);
+                }
+            };
+
+            // Show toast notification
+            const showToast = (message) => {
+                toastMessage.textContent = message;
+                toast.classList.add('show');
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            };
+
+            // Open add music modal
+            const openAddMusicModal = () => {
+                addMusicModal.classList.add('active');
+                // Reset form
+                addMusicForm.reset();
+                fileName.textContent = '';
+            };
+
+            // Close add music modal
+            const closeAddMusicModal = () => {
+                addMusicModal.classList.remove('active');
+            };
+
+            // Handle file input change
+            const handleFileInputChange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    fileName.textContent = file.name;
+                    fileDropArea.classList.add('glow');
+
+                    // Auto-fill title and artist from filename if they're empty
+                    if (songTitleInput.value === '') {
+                        // Try to extract title from filename (remove extension and split by dash or parenthesis)
+                        let title = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
+
+                        // Check if filename has format "Artist - Title" or "Title (Artist)"
+                        if (title.includes(' - ')) {
+                            const parts = title.split(' - ');
+                            if (parts.length >= 2) {
+                                if (artistNameInput.value === '') {
+                                    artistNameInput.value = parts[0].trim();
+                                }
+                                title = parts[1].trim();
+                            }
+                        } else if (title.includes('(') && title.includes(')')) {
+                            const match = title.match(/(.*)\s*$$(.*)$$/);
+                            if (match && match.length >= 3) {
+                                title = match[1].trim();
+                                if (artistNameInput.value === '') {
+                                    artistNameInput.value = match[2].trim();
+                                }
+                            }
+                        }
+
+                        songTitleInput.value = title;
+                    }
+                } else {
+                    fileName.textContent = '';
+                    fileDropArea.classList.remove('glow');
+                }
+            };
+
+            // Handle drag and drop
+            const handleDragOver = (e) => {
+                e.preventDefault();
+                fileDropArea.classList.add('glow');
+            };
+
+            const handleDragLeave = () => {
+                fileDropArea.classList.remove('glow');
+            };
+
+            const handleDrop = (e) => {
+                e.preventDefault();
+
+                if (e.dataTransfer.files.length) {
+                    musicFileInput.files = e.dataTransfer.files;
+                    handleFileInputChange({ target: { files: e.dataTransfer.files } });
+                }
+            };
+
+            // Handle form submission
+            const handleFormSubmit = (e) => {
+                e.preventDefault();
+
+                const title = songTitleInput.value.trim();
+                const artist = artistNameInput.value.trim();
+                const file = musicFileInput.files[0];
+
+                if (!title || !artist || !file) {
+                    showToast("Please fill in all fields and select a music file.");
+                    return;
+                }
+
+                // Check if file is an audio file
+                if (!file.type.startsWith('audio/')) {
+                    showToast("Please select a valid audio file.");
+                    return;
+                }
+
+                // Add song to playlist
+                const newSong = addSongToPlaylist(title, artist, file);
+
+                // Close modal and show success message
+                closeAddMusicModal();
+                showToast(`"${title}" by ${artist} added to your playlist!`);
+            };
+
             // Event Listeners
             playBtn.addEventListener('click', () => {
                 if (isPlaying) {
@@ -1383,7 +1987,9 @@
             mobilePrevBtn.addEventListener('click', prevSong);
             mobileNextBtn.addEventListener('click', nextSong);
             restartBtn.addEventListener('click', () => {
-                audioPlayer.currentTime = 0;
+                if (audioPlayer.src) {
+                    audioPlayer.currentTime = 0;
+                }
             });
 
             // Update progress as song plays
@@ -1398,30 +2004,38 @@
             // Volume change
             volumeSlider.addEventListener('input', updateVolume);
 
-            // Playlist item click
-            playlistItems.forEach((item, index) => {
-                item.addEventListener('click', () => {
-                    currentSongIndex = index;
-                    loadSong(currentSongIndex);
-                    updatePlaylistActiveItem();
-                    playSong();
-                });
-            });
-
             // Playlist toggle
             playlistToggle.addEventListener('click', togglePlaylist);
 
             // Theme toggle
             themeToggle.addEventListener('click', toggleTheme);
 
+            // Add music button
+            addMusicBtn.addEventListener('click', openAddMusicModal);
+
+            // Close modal button
+            closeModalBtn.addEventListener('click', closeAddMusicModal);
+
+            // Close modal when clicking outside
+            addMusicModal.addEventListener('click', (e) => {
+                if (e.target === addMusicModal) {
+                    closeAddMusicModal();
+                }
+            });
+
+            // File input change
+            musicFileInput.addEventListener('change', handleFileInputChange);
+
+            // Drag and drop
+            fileDropArea.addEventListener('dragover', handleDragOver);
+            fileDropArea.addEventListener('dragleave', handleDragLeave);
+            fileDropArea.addEventListener('drop', handleDrop);
+
+            // Form submission
+            addMusicForm.addEventListener('submit', handleFormSubmit);
+
             // Initialize the player
             initPlayer();
-
-            // Simulate song loading delay for demo
-            setTimeout(() => {
-                // For demo purposes, we'll simulate a loaded song
-                totalTimeEl.textContent = playlist[currentSongIndex].duration;
-            }, 1000);
         });
     </script>
 </body>
