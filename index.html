@@ -26,7 +26,6 @@
         * {
             margin: 0;
             padding: 0;
-            overflow-y: scroll;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -116,16 +115,17 @@
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 3rem;
             color: var(--light-color);
             text-shadow: 0 0 10px rgba(255, 118, 118, 0.7);
             margin-bottom: 5px;
-            font-weight: 700;
+            font-weight: 900;
             letter-spacing: 1px;
         }
 
         .subtitle {
-            font-size: 0.9rem;
+            font-size: 1.4rem;
+            font-weight: bold;
             color: var(--accent-color);
             margin-bottom: 10px;
             letter-spacing: 2px;
@@ -224,8 +224,7 @@
         }
 
         .song-title {
-            font-size: 1.5rem;
-            /* Increased from 1.2rem */
+            font-size: 1.8rem;
             color: var(--light-color);
             margin-bottom: 5px;
             font-weight: 700;
@@ -234,14 +233,13 @@
             overflow: hidden;
             text-overflow: ellipsis;
             max-width: 100%;
-            padding: 0 10px;
         }
 
         .song-artist {
-            font-size: 0.9rem;
+            font-size: 1.4rem;
             color: var(--accent-color);
             opacity: 0.9;
-            font-weight: 400;
+            font-weight: bolder;
         }
 
         .visualizer-container {
@@ -320,7 +318,8 @@
             top: 16px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.4rem;
+            font-size: 0.7rem;
+            font-weight: bolder;
             /* Increased from 0.8rem */
             color: var(--accent-color);
             text-transform: uppercase;
@@ -930,7 +929,7 @@
         }
 
         body.light-theme .container {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(247, 255, 255, 0.982);
             color: var(--dark-color);
         }
 
@@ -977,7 +976,7 @@
         }
 
         body.light-theme .modal {
-            background: rgba(240, 240, 245, 0.95);
+            background: rgba(255, 247, 193, 0.95);
         }
 
         body.light-theme .form-input {
@@ -1038,12 +1037,13 @@
             }
 
             h1 {
-                font-size: 1.5rem;
+                font-size: 2.5rem;
                 margin-bottom: 2px;
             }
 
             .subtitle {
-                font-size: 0.8rem;
+                font-size: 1.4rem;
+                font-weight: bold;
                 margin-bottom: 5px;
             }
 
@@ -1096,8 +1096,8 @@
             }
 
             .cassette {
-                width: 300px;
-                height: 220px;
+                width: 400px;
+                height: 300px;
             }
 
             .cassette-reel {
@@ -1496,24 +1496,125 @@
             // Sample default playlist with actual audio URLs
             let playlist = [
                 {
-                    title: "Ek Ladki Ko Dekha",
+                    title: "Tere Ishq Mein Pagal",
+                    artist: "Udit Narayan & Alka Yagnik",
+                    duration: "6:04",
+                    blobUrl: "Tere Ishq Mein Pagal Humko Tumse Pyar Hai 320 Kbps (1) (1).mp3",
+                    imageUrl: "thumbnail.png"
+
+                },
+                {
+                    title: "Ek Din Aap",
                     artist: "Kumar Sanu",
-                    duration: "4:30",
-                    // Using a data URL for a short audio sample
-                    blobUrl: "data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAEluZm8AAAAPAAAAAwAAAbAAkJCQkJCQkJCQkJCQkJCQwMDAwMDAwMDAwMDAwMDAwMD4+Pj4+Pj4+Pj4+Pj4+Pj4//////////////////////////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAA=="
+                    duration: "4:28",
+                    blobUrl: "Ek Din Aap.mp3",
+                    imageUrl: "thumbnail.png"
                 },
                 {
-                    title: "Tujhe Dekha To",
-                    artist: "Lata Mangeshkar & Kumar Sanu",
-                    duration: "5:02",
-                    blobUrl: "data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAEluZm8AAAAPAAAAAwAAAbAAkJCQkJCQkJCQkJCQkJCQwMDAwMDAwMDAwMDAwMDAwMD4+Pj4+Pj4+Pj4+Pj4+Pj4//////////////////////////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAA=="
+                    title: "Aaina Bata Kaise",
+                    artist: "Sonu Nigam & Vinod Rathod",
+                    duration: "6:07",
+                    blobUrl: "01. Aaina Bata Kaise.mp3",
+                    imageUrl: "thumbnail.png"
+                },
+
+                {
+                    title: "Kisise Tum Pyar Karo",
+                    artist: "Alka Yagnik & Kumar Sanu",
+                    duration: "5:06",
+                    blobUrl: "Kisise Tum Pyar Karo - Andaaz.mp3",
+                    imageUrl: "thumbnail.png"
+
+                },
+
+                {
+                    title: "Tham Ke Baras",
+                    artist: "Alka Yagnik",
+                    duration: "6:43",
+                    blobUrl: "Tham Ke Baras -Alka Yagnik.mp3",
+                    imageUrl: "thumbnail.png"
                 },
                 {
-                    title: "Pehla Nasha",
-                    artist: "Udit Narayan & Sadhana Sargam",
-                    duration: "4:22",
-                    blobUrl: "data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAEluZm8AAAAPAAAAAwAAAbAAkJCQkJCQkJCQkJCQkJCQwMDAwMDAwMDAwMDAwMDAwMD4+Pj4+Pj4+Pj4+Pj4+Pj4//////////////////////////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA+Pj4+Pj4+Pj4+Pj4+Pj4+P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAJAYAAAAAAAAAAbBk9L0JAAAAAAAAAAAAAAAAAAAAAA=="
-                }
+                    title: "Aaj Kehna Zaroori Hai",
+                    artist: "Udit Narayan & Alka Yagnik",
+                    duration: "5:58",
+                    blobUrl: "Aaj Kehna Zaroori Hai - Andaaz.mp3",
+                    imageUrl: "thumbnail.png"
+                },
+
+                {
+                    title: "Kisi Din Banoongi Main",
+                    artist: "Alka Yagnik & Udit Narayan",
+                    duration: "7:18",
+                    blobUrl: "Kisi Din Banoongi Main - Raja 128 Kbps.mp3",
+                    imageUrl: "thumbnail.png"
+                },
+
+                {
+                    title: "Shairana Si Hai Zindagi",
+                    artist: "Alka Yagnik",
+                    duration: "7:00",
+                    blobUrl: "08. Shairana Si Hai Zindagi.mp3",
+                    imageUrl: "thumbnail.png"
+                },
+
+                {
+                    title: "Chaand Taaron Mein",
+                    artist: "Udit Narayan & Sadhna Sargam",
+                    duration: "5:16",
+                    blobUrl: "01. Chaand Taaron Mein.mp3",
+                    imageUrl: "thumbnail.png"
+                },
+
+                {
+                    title: "Phool Phool Pe Bani",
+                    artist: "Udit Narayan",
+                    duration: "7:33",
+                    blobUrl: "Phool Phool Pe Bani Hai Teri Tasveer - Phool 128 Kbps.mp3",
+                    imageUrl: "thumbnail.png"
+                },
+
+                {
+                    title: "Chhodenge Na Hum Tera Saath",
+                    artist: "Anuradha Paudwal & Md. Aziz",
+                    duration: "6:35",
+                    blobUrl: "Chhodenge Na Hum Tera Saath - Marte Dam Tak 128 Kbps.mp3",
+                    imageUrl: "thumbnail.png"
+                },
+
+                {
+                    title: "Jungle Hai Aadhi Raat Hai",
+                    artist: "Kumar Sanu",
+                    duration: "6:13",
+                    blobUrl: "old_BN1-Jungle Hai Aadhi Raat Hai.mp3",
+                    imageUrl: "thumbnail.png"
+                },
+
+                {
+                    title: "Mera Dil Tere Liye",
+                    artist: "Udit Narayan & Anuradha Paudwal",
+                    duration: "4:43",
+                    blobUrl: "new_128_06 Mera Dil Tere Liye.mp3",
+                    imageUrl: "thumbnail.png"
+                },
+
+                {
+                    title: "Ajnabi Mujhko Itna Bata",
+                    artist: "Udit Narayan & Asha Bhosle",
+                    duration: "6:13",
+                    blobUrl: "Ajnabi Mujhko Itna Bata Pyaar To Hona Hi Tha 128 Kbps.mp3",
+                    imageUrl: "thumbnail.png"
+                },
+
+                {
+                    title: "Aadmi Khilona Hai",
+                    artist: "Kumar Sanu & Alka Yagnik",
+                    duration: "5:03",
+                    blobUrl: "Aadmi Khilona Hai - Title Song - 320Kbps.mp3",
+                    imageUrl: "thumbnail.png"
+                },
+
+
             ];
 
             // Variables
