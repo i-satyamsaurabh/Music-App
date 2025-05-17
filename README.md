@@ -6,7 +6,7 @@
 ![Status](https://img.shields.io/badge/status-live-success)
 
 <p align="center">
-  <img src="/api/placeholder/800/400" alt="Nostalgia Beats Screenshot" />
+  <img src="App_pic" alt="Nostalgia Beats Screenshot" />
 </p>
 
 ## ✨ Overview
